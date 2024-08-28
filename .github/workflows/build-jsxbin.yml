@@ -13,19 +13,23 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up ExtendScript Toolkit
+    - name: Download ExtendScript Toolkit
       run: |
-        $url = "https://raw.githubusercontent.com/Adobe-CEP/CEP-Resources/master/ExtendScript-Toolkit/4.0/ExtendScript%20Toolkit%20CS6.zip"
-        $output = "$env:TEMP\ESTK.zip"
+        $url = "https://github.com/Adobe-CEP/CEP-Resources/raw/master/ExtendScript-Toolkit/AdobeExtendScriptToolkit_4_LS22.exe"
+        $output = "$env:TEMP\ESTK_Installer.exe"
         Invoke-WebRequest -Uri $url -OutFile $output
-        Expand-Archive -Path $output -DestinationPath $env:TEMP\ESTK
+      shell: powershell
+
+    - name: Install ExtendScript Toolkit
+      run: |
+        Start-Process -FilePath "$env:TEMP\ESTK_Installer.exe" -ArgumentList "/S" -Wait
       shell: powershell
 
     - name: Compile JSX to JSXBIN
       run: |
-        $estkExe = "$env:TEMP\ESTK\ExtendScript Toolkit CS6\ExtendScript Toolkit.exe"
-        $jsxFile = "path\to\your\script.jsx"
-        $jsxbinFile = "path\to\output\script.jsxbin"
+        $estkExe = "C:\Program Files (x86)\Adobe\Adobe ExtendScript Toolkit CC\ExtendScript Toolkit.exe"
+        $jsxFile = "bpmmarker.jsx"
+        $jsxbinFile = "bpmmarker.jsxbin"
         
         & $estkExe -cmd "$jsxFile" "var f=new File('$jsxbinFile');f.open('w');f.write(app.compile(File('$jsxFile')).toSource());f.close();"
       shell: powershell
@@ -34,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: compiled-script
-        path: path\to\output\script.jsxbin
+        path: bpmmarker.jsxbin
