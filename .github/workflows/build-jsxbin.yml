@@ -15,7 +15,7 @@ jobs:
 
     - name: Download ExtendScript Toolkit
       run: |
-        $url = "https://github.com/Adobe-CEP/CEP-Resources/raw/master/ExtendScript-Toolkit/AdobeExtendScriptToolkit_4_LS22.exe"
+        $url = "https://raw.githubusercontent.com/Adobe-CEP/CEP-Resources/master/ExtendScript-Toolkit/AdobeExtendScriptToolkit_4_LS22.exe"
         $output = "$env:TEMP\ESTK_Installer.exe"
         Invoke-WebRequest -Uri $url -OutFile $output
       shell: powershell
