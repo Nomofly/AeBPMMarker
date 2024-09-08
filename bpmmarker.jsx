@@ -137,7 +137,7 @@
         // 版权信息
         var copyrightGroup = myPanel.add("group");
         copyrightGroup.alignment = ["fill", "bottom"];
-        var copyrightText = copyrightGroup.add("statictext", undefined, "©️monofly.com");
+        var copyrightText = copyrightGroup.add("statictext", undefined, "©️nomofly.com");
         copyrightText.alignment = ["center", "center"];
         copyrightText.graphics.font = ScriptUI.newFont("Arial", "REGULAR", 9);
         copyrightText.graphics.foregroundColor = copyrightText.graphics.newPen(copyrightText.graphics.PenType.SOLID_COLOR, [0.5, 0.5, 0.5], 1);
